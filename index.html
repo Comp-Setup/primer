@@ -6,7 +6,7 @@
 <style>
   body{margin:0;font-family:'Inter',sans-serif;background:#fff;color:#333;width:360px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
   
-  /* Header & Registration */
+  /* Header & Registration (h=54) */
   header{height:54px;display:flex;align-items:center;justify-content:flex-end;padding-right:16px;box-sizing:border-box}
   .reg{color:#00796B;text-decoration:none;font-size:14px;font-weight:600;margin-right:12px}
   .a-ic{width:32px;height:32px;background:#00796B;border-radius:50%;color:#fff;text-align:center;line-height:32px;font-weight:700}
@@ -31,10 +31,10 @@
   .s-1{left:20px;color:#00796B;border-bottom:1px dashed #00796B}
   .s-2{left:205px;color:#888}
 
-  /* ТОП Заголовок (185) */
+  /* ТОП Заголовок (185, left 1) */
   .h-top{position:relative;width:360px;height:60px;margin-top:16px;display:flex;align-items:center;padding-left:1px;box-sizing:border-box}
   .h-top h2{margin:0 10px;font-size:20px;font-weight:700}
-  .arr-btn{color:#00796B;font-size:24px;cursor:pointer;font-weight:700;padding:0 5px}
+  .arr-btn{color:#00796B;font-size:24px;cursor:pointer;font-weight:700;padding:0 5px;user-select:none}
 
   /* Блок ТОП (229, 18) */
   .row-outer{padding-left:18px;margin-top:0px}
@@ -88,8 +88,9 @@
   <div class="row" id="r">
     <script>
       for(let i=1;i<=10;i++) {
-        // Изменил формат картинки на png для первой позиции
-        let imgPath = (i === 1) ? "images/1.png" : "images/" + i + ".webp";
+        // Подключаем 1.png и 2.png для первых двух позиций
+        let ext = (i <= 2) ? ".png" : ".webp";
+        let imgPath = "images/" + i + ext;
         document.write(`
           <div class="item">
             <div class="img"><img src="${imgPath}" alt=""></div>
