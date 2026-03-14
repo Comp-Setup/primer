@@ -1,120 +1,48 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=360,user-scalable=0">
-<style>
-  body{margin:0;font-family:'Inter',sans-serif;background:#fff;color:#333;width:360px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-  
-  /* Header (h=54) */
-  header{height:54px;display:flex;align-items:center;justify-content:flex-end;padding-right:16px;box-sizing:border-box}
-  .reg{color:#00796B;text-decoration:none;font-size:14px;font-weight:600;margin-right:12px}
-  .a-ic{width:32px;height:32px;background:#00796B;border-radius:50%;color:#fff;text-align:center;line-height:32px;font-weight:700}
-
-  /* Поиск (82, 19, 183x27) */
-  .s-box{position:absolute;width:183px;height:27px;top:82px;left:19px;border:1px solid #056A50;border-radius:5px;box-sizing:border-box}
-  .s-box input{width:100%;height:100%;border:none;padding-left:26px;font-size:12px;outline:none;background:transparent}
-  .lp{position:absolute;left:8px;top:7px;width:11px;height:11px;border:1.5px solid #666;border-radius:50%}
-
-  /* КАТЕГОРИИ: Единый блок с отступом справа */
-  .cat-group{position:absolute;top:82px;left:209px;display:flex;width:134px; /* Скорректировано для отступа */ height:27px;border:1px solid #056A50;border-radius:5px;overflow:hidden;box-sizing:border-box}
-  .c-box{width:116px;height:100%;font-size:12px;line-height:25px;padding-left:8px;border-right:1px solid #056A50;box-sizing:border-box}
-  .c-arr{width:18px;height:100%;display:flex;align-items:center;justify-content:center}
-  .arr-v{width:0;height:0;border-left:3.5px solid transparent;border-right:3.5px solid transparent;border-top:5px solid #333}
-
-  /* Табы (130) */
-  .tabs-wrap{position:relative;height:17px;margin-top:76px;border-bottom:1px solid #eee;padding-bottom:10px}
-  .tabs-wrap a{position:absolute;height:17px;color:#00796B;text-decoration:none;font-size:14px;font-weight:600;line-height:100%;white-space:nowrap}
-  .t-new{left:19px;width:47px;border-bottom:2px solid #00796B}
-  .t-old{left:104px;width:24px}.t-srv{left:164px;width:48px}.t-vid{left:243px;width:103px}
-
-  /* Сортировка (169) */
-  .sort-sec{position:relative;height:19px;margin-top:22px}
-  .s-btn{position:absolute;width:139px;height:19px;font-size:11px;text-align:center}
-  .s-1{left:20px;color:#00796B;border-bottom:1px dashed #00796B}
-  .s-2{left:205px;color:#888}
-
-  /* ТОП Заголовок (185) */
-  .h-top{position:relative;width:360px;height:60px;margin-top:16px;display:flex;align-items:center;padding-left:1px;box-sizing:border-box}
-  .h-top h2{margin:0 10px;font-size:20px;font-weight:700}
-  .arr-btn{color:#00796B;font-size:24px;cursor:pointer;font-weight:700;padding:0 5px;user-select:none}
-
-  /* Блок ТОП (229, 18) */
-  .row-outer{padding-left:18px;margin-top:0px}
-  .row{display:flex;overflow-x:auto;gap:12px;padding-bottom:20px;scrollbar-width:none;scroll-behavior:smooth}
-  .row::-webkit-scrollbar{display:none}
-
-  /* Карточка позиции */
-  .item{flex-shrink:0;width:96.15px;display:flex;flex-direction:column}
-  .img{width:96px;height:96px;border-radius:10px;border:1px solid #F45E00;overflow:hidden;box-sizing:border-box}
-  .img img{width:100%;height:100%;object-fit:cover;display:block}
-  
-  .info{width:96.15px;height:51px;padding-top:5px;display:flex;flex-direction:column;justify-content:space-between;box-sizing:border-box}
-  .name{font-size:11px;line-height:1.2;height:26px;overflow:hidden;font-weight:400;color:#333}
-  .bot{display:flex;justify-content:space-between;align-items:center}
-  .rate{color:#888;font-size:10px;display:flex;align-items:center}
-  .rate:before{content:'★';color:#FFB400;margin-right:2px;font-size:11px}
-  .prc{color:#00796B;font-weight:700;font-size:11px}
-</style>
-</head>
-<body>
-
-<header>
-  <a href="#" class="reg">Войти/Регистрация</a>
-  <div class="a-ic">A</div>
-</header>
-
-<div class="s-box"><div class="lp"></div><input type="text" placeholder="Сковородки"></div>
-
-<div class="cat-group">
-  <div class="c-box">Категории</div>
-  <div class="c-arr"><div class="arr-v"></div></div>
-</div>
-
-<div class="tabs-wrap">
-  <a href="#" class="t-new">Новые</a>
-  <a href="#" class="t-old">Б/У</a>
-  <a href="#" class="t-srv">Услуги</a>
-  <a href="#" class="t-vid">Видео советы</a>
-</div>
-
-<div class="sort-sec">
-  <div class="s-btn s-1">от дешевых к дорогим</div>
-  <div class="s-btn s-2">от дорогих к дешевым</div>
-</div>
-
-<div class="h-top">
-  <span class="arr-btn" onclick="sc(-108)">&larr;</span>
-  <h2>Топ</h2>
-  <span class="arr-btn" onclick="sc(108)">&rarr;</span>
-</div>
-
-<div class="row-outer">
-  <div class="row" id="r">
-    <script>
-      for(let i=1;i<=10;i++) {
-        let imgPath = "";
-        if (i === 1) imgPath = "images/1.png";
-        else if (i === 2) imgPath = "images/2.png";
-        else if (i === 3) imgPath = "images/image12.png";
-        else imgPath = "images/" + i + ".webp";
-
-        document.write(`
-          <div class="item">
-            <div class="img"><img src="${imgPath}" alt=""></div>
-            <div class="info">
-              <div class="name">Сковородка тефлоновая</div>
-              <div class="bot">
-                <span class="rate">4.8</span>
-                <span class="prc">2400 грн</span>
-              </div>
-            </div>
-          </div>`);
-      }
-      function sc(v){document.getElementById('r').scrollBy(v,0)}
-    </script>
-  </div>
-</div>
-
-</body>
-</html>
+<!doctype html><html lang=ru><meta charset=utf-8><meta name=viewport content="width=360,user-scalable=0"><title>Сковородки</title><style>
+body{margin:0;font-family:Inter,sans-serif;background:#fff;color:#333;width:360px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+header{height:54px;display:flex;align-items:center;justify-content:flex-end;padding-right:16px;box-sizing:border-box}
+.reg{color:#00796B;text-decoration:none;font-size:14px;font-weight:600;margin-right:12px}
+.a-ic{width:32px;height:32px;background:#00796B;border-radius:50%;color:#fff;text-align:center;line-height:32px;font-weight:700}
+.s-box{position:absolute;width:183px;height:27px;top:82px;left:19px;border:1px solid #056A50;border-radius:5px;box-sizing:border-box}
+.s-box input{width:100%;height:100%;border:0;padding-left:26px;font-size:12px;outline:0;background:0}
+.lp{position:absolute;left:8px;top:7px;width:11px;height:11px;border:1.5px solid #666;border-radius:50%}
+.cat-group{position:absolute;top:82px;left:209px;display:flex;width:134px;height:27px;border:1px solid #056A50;border-radius:5px;overflow:hidden;box-sizing:border-box}
+.c-box{width:116px;height:100%;font-size:12px;line-height:25px;padding-left:8px;border-right:1px solid #056A50;box-sizing:border-box}
+.c-arr{width:18px;height:100%;display:flex;align-items:center;justify-content:center}.arr-v{width:0;height:0;border-left:3.5px solid transparent;border-right:3.5px solid transparent;border-top:5px solid #333}
+.tabs-wrap{position:relative;height:17px;margin-top:76px;border-bottom:1px solid #eee;padding-bottom:10px}
+.tabs-wrap a{position:absolute;height:17px;color:#00796B;text-decoration:none;font-size:14px;font-weight:600;line-height:100%;white-space:nowrap}
+.t-new{left:19px;width:47px;border-bottom:2px solid #00796B}
+.t-old{left:104px;width:24px}.t-srv{left:164px;width:48px}.t-vid{left:243px;width:103px}
+.sort-sec{position:relative;height:19px;margin-top:22px}
+.s-btn{position:absolute;width:139px;height:19px;font-size:11px;text-align:center}
+.s-1{left:20px;color:#00796B;border-bottom:1px dashed #00796B}
+.s-2{left:205px;color:#888}
+.h-top{position:relative;width:360px;height:60px;margin-top:16px;display:flex;align-items:center;padding-left:1px;box-sizing:border-box}
+.h-top h2{margin:0 10px;font-size:20px;font-weight:700}
+.arr-btn{color:#00796B;font-size:24px;cursor:pointer;font-weight:700;padding:0 5px;user-select:none}
+.row-outer{padding-left:18px}.row{display:flex;overflow-x:auto;gap:12px;padding-bottom:20px;scrollbar-width:none;scroll-behavior:smooth}.row::-webkit-scrollbar{display:none}
+.item{flex-shrink:0;width:96.15px;display:flex;flex-direction:column}
+.img{width:96px;height:96px;border-radius:10px;border:1px solid #F45E00;overflow:hidden;box-sizing:border-box}
+.img img{width:100%;height:100%;object-fit:cover;display:block}
+.info{width:96.15px;height:51px;padding-top:5px;display:flex;flex-direction:column;justify-content:space-between;box-sizing:border-box}
+.name{font-size:11px;line-height:1.2;height:26px;overflow:hidden;font-weight:400;color:#333}
+.bot{display:flex;justify-content:space-between;align-items:center}
+.rate{color:#888;font-size:10px;display:flex;align-items:center}
+.rate:before{content:'★';color:#FFB400;margin-right:2px;font-size:11px}
+.prc{color:#00796B;font-weight:700;font-size:11px}
+</style><body>
+<header><a href=# class=reg>Войти/Регистрация</a><div class=a-ic>A</div></header>
+<div class=s-box><div class=lp></div><input placeholder=Сковородки></div>
+<div class=cat-group><div class=c-box>Категории</div><div class=c-arr><div class=arr-v></div></div></div>
+<div class=tabs-wrap><a href=# class="t-new">Новые</a><a href=# class="t-old">Б/У</a><a href=# class="t-srv">Услуги</a><a href=# class="t-vid">Видео советы</a></div>
+<div class=sort-sec><div class="s-btn s-1">от дешевых к дорогим</div><div class="s-btn s-2">от дорогих к дешевым</div></div>
+<div class=h-top><span class=arr-btn onclick=sc(-108)>&larr;</span><h2>Топ</h2><span class=arr-btn onclick=sc(108)>&rarr;</span></div>
+<div class=row-outer><div class=row id=r>
+<script>
+for(let i=5;i<=14;i++){
+  // Добавлен атрибут loading=lazy для экономии трафика первого экрана
+  document.write(`<div class=item><div class=img><img src="images/${i}.webp" loading="lazy"></div><div class=info><div class=name>Сковородка тефлоновая</div><div class=bot><span class=rate>4.8</span><span class=prc>2400 грн</span></div></div></div>`);
+}
+function sc(v){document.getElementById('r').scrollBy(v,0)}
+</script>
+</div></div></body></html>
