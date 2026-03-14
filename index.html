@@ -6,7 +6,7 @@
 <style>
   body{margin:0;font-family:'Inter',sans-serif;background:#fff;color:#333;width:360px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
   
-  /* Header & Registration (h=54) */
+  /* Header (h=54) */
   header{height:54px;display:flex;align-items:center;justify-content:flex-end;padding-right:16px;box-sizing:border-box}
   .reg{color:#00796B;text-decoration:none;font-size:14px;font-weight:600;margin-right:12px}
   .a-ic{width:32px;height:32px;background:#00796B;border-radius:50%;color:#fff;text-align:center;line-height:32px;font-weight:700}
@@ -21,7 +21,7 @@
 
   /* Табы (130) */
   .tabs-wrap{position:relative;height:17px;margin-top:76px;border-bottom:1px solid #eee;padding-bottom:10px}
-  .tabs-wrap a{position:absolute;height:17px;color:#00796B;text-decoration:none;font-size:14px;font-weight:600;line-height:100%}
+  .tabs-wrap a{position:absolute;height:17px;color:#00796B;text-decoration:none;font-size:14px;font-weight:600;line-height:100%;white-space:nowrap}
   .t-new{left:19px;width:47px;border-bottom:2px solid #00796B}
   .t-old{left:104px;width:24px}.t-srv{left:164px;width:48px}.t-vid{left:243px;width:103px}
 
@@ -88,9 +88,12 @@
   <div class="row" id="r">
     <script>
       for(let i=1;i<=10;i++) {
-        // Подключаем 1.png и 2.png для первых двух позиций
-        let ext = (i <= 2) ? ".png" : ".webp";
-        let imgPath = "images/" + i + ext;
+        let imgPath = "";
+        if (i === 1) imgPath = "images/1.png";
+        else if (i === 2) imgPath = "images/2.png";
+        else if (i === 3) imgPath = "images/image12.png"; // Обновленный путь для 3-й позиции
+        else imgPath = "images/" + i + ".webp";
+
         document.write(`
           <div class="item">
             <div class="img"><img src="${imgPath}" alt=""></div>
